@@ -1,1 +1,17 @@
-<p>carousel-row works!</p>
+<section class="carousel-section">
+  <h2 class="carousel-title">{{ title }}</h2>
+
+  <div class="carousel-track" [class.featured]="featured">
+    @for (item of items; track item.id) {
+      <app-card [item]="item" />
+    }
+  </div>
+
+  @if (showDots) {
+    <div class="carousel-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  }
+</section>

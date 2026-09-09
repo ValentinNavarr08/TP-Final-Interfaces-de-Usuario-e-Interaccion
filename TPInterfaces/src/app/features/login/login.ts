@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Footer } from '../../shared/components/footer/footer';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule, Footer],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

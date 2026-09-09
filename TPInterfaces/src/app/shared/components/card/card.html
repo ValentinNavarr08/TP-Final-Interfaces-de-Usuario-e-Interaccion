@@ -1,1 +1,9 @@
-<p>card works!</p>
+<div class="card">
+  <img [src]="item.posterUrl" [alt]="item.title" class="card-poster" loading="lazy" />
+
+  @if (item.progress !== undefined) {
+    <div class="progress-track">
+      <div class="progress-fill" [style.width.%]="item.progress"></div>
+    </div>
+  }
+</div>

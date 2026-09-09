@@ -1,0 +1,78 @@
+.carousel-section {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-left: max(
+    var(--page-padding),
+    calc((100vw - var(--page-max-width)) / 2 + var(--page-padding))
+  );
+  padding-right: 0;
+  padding-top: clamp(12px, 2vw, 32px);
+  padding-bottom: clamp(8px, 1.5vw, 24px);
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+}
+
+.carousel-title {
+  position: relative;
+  top: clamp(10px, 2vw, 30px);
+  left: 50px;
+  font-family: var(--font-principal);
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 60px);
+  line-height: 1.15;
+  letter-spacing: -0.25px;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.16) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0 0 16px 0;
+}
+
+.carousel-track {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.65%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-track > app-card {
+  display: block;
+  flex: 0 0 16.80%;
+  scroll-snap-align: start;
+}
+
+.carousel-track.featured > app-card {
+  flex: 0 0 19.79%;
+  --card-aspect: 304 / 183;
+}
+
+.carousel-dots {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  padding: 10px var(--page-padding) 10px 0;
+  align-self: flex-end;
+  margin-top: 8px;
+}
+
+.carousel-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50px;
+  background: linear-gradient(0deg, rgba(94, 94, 94, 0.18), rgba(94, 94, 94, 0.18)), rgba(255, 255, 255, 0.07);
+  background-blend-mode: color-dodge, normal;
+}
+
+.carousel-dots .dot.active {
+  background: var(--color-brand-purple);
+}

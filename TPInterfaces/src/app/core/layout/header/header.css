@@ -1,0 +1,124 @@
+/* ===== Header general ===== */
+.app-header {
+  padding-block: 16px;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: nowrap;
+}
+
+/* ===== Logo ===== */
+.header-logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.logo-text {
+  font-family: var(--font-logo);
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 32px;
+  letter-spacing: -0.115em;
+  background: linear-gradient(90deg, var(--color-purple-bright), var(--color-purple-medium));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.logo-arrow-icon {
+  width: 26px;
+  height: 30px;
+  fill: var(--color-accent-purple);
+  flex-shrink: 0;
+}
+
+/* ===== Barra de búsqueda ===== */
+.header-search {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 500px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-search-bg);
+  border: none;
+  border-radius: 9945px;
+  padding: 0 20px;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  color: #1a1a1a;
+  font-family: var(--font-principal);
+  font-size: 15px;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: #6b7280;
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.search-btn svg {
+  stroke: var(--color-search-icon);
+}
+
+/* ===== Íconos de acción (campana, usuario) ===== */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.icon-btn {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.icon-img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background-color: var(--color-brand-purple);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

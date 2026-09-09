@@ -1,32 +1,32 @@
-<div class="hero-background">
+<div class="page-background">
   <img class="hero-image" src="resources/image.png" alt="Fondo de inicio de sesión" />
-  <div class="hero-glow"></div>
+  <div class="page-glow-primary"></div>
+  <div class="page-glow-secondary"></div>
 </div>
 
 <main class="login-container">
   <div class="login-card">
     <div class="login-logo">
-      <span class="logo-text">NETFLICS</span>
-      <span class="logo-arrow">▶</span>
-    </div>
+  <img src="resources/logo-form.png" alt="Netflics" class="logo-image" />
+</div>
+    
+<div class="form-separator"></div>
 
-    <div class="logo-divider"></div>
+<form class="login-form" (ngSubmit)="onSubmit()">
+  <div class="form-field">
+    <label for="email">Email</label>
+    <input type="email" id="email" [(ngModel)]="email" name="email" required />
+  </div>
 
-    <form class="login-form" (ngSubmit)="onSubmit()">
-      <div class="form-field">
-        <label for="email">Email</label>
-        <input type="email" id="email" [(ngModel)]="email" name="email" required />
-      </div>
+  <div class="form-field">
+    <label for="password">Contraseña</label>
+    <input type="password" id="password" [(ngModel)]="password" name="password" required />
+    <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+  </div>
 
-      <div class="form-field">
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" [(ngModel)]="password" name="password" required />
-        <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
-      </div>
+  <button type="submit" class="btn-primary">Ingresar</button>
 
-      <button type="submit" class="btn-primary">Ingresar</button>
-
-      <div class="form-divider"></div>
+  <div class="form-separator"></div>    
 
       <button type="button" class="btn-google">
         Ingresar con Google
@@ -37,3 +37,4 @@
     </form>
   </div>
 </main>
+<app-footer></app-footer>
