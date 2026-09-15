@@ -174,3 +174,72 @@
   color: #9d8fe0;
   text-decoration: underline;
 }
+
+/* ===== Estados de error ===== */
+
+.form-field input {
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.form-field.has-error input {
+  border-color: #E5484D;
+  background-color: rgba(229, 72, 77, 0.06);
+}
+
+.form-field.has-error input:focus {
+  border-color: #E5484D;
+}
+
+.form-field.has-error label {
+  color: #E5484D;
+}
+
+.field-error {
+  font-size: 12px;
+  line-height: 1.3;
+  color: #E5484D;
+  animation: error-in 0.2s ease-out;
+}
+
+/* Error general del formulario (ej. credenciales incorrectas) */
+.form-error {
+  padding: 10px 14px;
+  background-color: rgba(229, 72, 77, 0.1);
+  border: 1px solid rgba(229, 72, 77, 0.4);
+  border-radius: 8px;
+  font-size: 13px;
+  color: #E5484D;
+  text-align: center;
+  animation: error-in 0.2s ease-out;
+}
+
+@keyframes error-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shake al intentar enviar con errores */
+.login-card.shake {
+  animation: card-shake 0.4s ease;
+}
+
+@keyframes card-shake {
+  10%, 90% { transform: translateX(-3px); }
+  20%, 80% { transform: translateX(5px); }
+  30%, 50%, 70% { transform: translateX(-7px); }
+  40%, 60% { transform: translateX(7px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-card.shake,
+  .field-error,
+  .form-error {
+    animation: none;
+  }
+}

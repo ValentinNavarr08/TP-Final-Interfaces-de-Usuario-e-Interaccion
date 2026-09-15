@@ -1,0 +1,147 @@
+<div class="plans-page">
+  <div class="page-background">
+    <img class="hero-image" src="resources/image.png" alt="" aria-hidden="true" />
+    <div class="page-glow-primary"></div>
+    <div class="page-glow-secondary"></div>
+  </div>
+
+  <header class="plans-header">
+    <div class="plans-logo">
+  <span class="logo-text">NETFLICS</span>
+  <svg class="logo-arrow-icon" width="71" height="80" viewBox="0 0 71 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#filter0_d_plans_logo)">
+      <g clip-path="url(#clip0_plans_logo)">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M59.2938 29.3313L21.0648 6.06116C14.6645 2.1677 6.7 7.09363 6.7 14.9318V61.4697C6.7 69.3179 14.6645 74.2337 21.0648 70.3403L59.2938 47.0818C65.7421 43.1577 65.7421 33.2554 59.2938 29.3313Z" fill="#6155F5"/>
+        <path d="M7.45 14.9316C7.45007 7.5934 14.8453 3.15623 20.6746 6.70215L58.9041 29.9717C64.8722 33.6036 64.8722 42.8095 58.9041 46.4414L20.6746 69.6992C14.8448 73.2455 7.45004 68.8175 7.45 61.4697V14.9316Z" stroke="white" stroke-opacity="0.45" stroke-width="1.5"/>
+      </g>
+    </g>
+    <defs>
+      <filter id="filter0_d_plans_logo" x="-2.86102e-06" y="-0.687304" width="70.83" height="80.402" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+        <feOffset dy="2"/>
+        <feGaussianBlur stdDeviation="3.35"/>
+        <feComposite in2="hardAlpha" operator="out"/>
+        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.54 0"/>
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_plans_logo"/>
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_plans_logo" result="shape"/>
+      </filter>
+      <clipPath id="clip0_plans_logo">
+        <rect width="57.43" height="67.0024" fill="white" transform="translate(6.7 4.0127)"/>
+      </clipPath>
+    </defs>
+  </svg>
+</div>
+  </header>
+
+  <main class="plans-content">
+    <h1 class="plans-title">Nuestros Planes</h1>
+
+    <div class="plans-grid">
+      @for (plan of plans; track plan.id) {
+        <div class="plan-card" [class]="plan.cardClass">
+          <div class="plan-card-header">
+                <div class="plan-card-header">
+  <span class="plan-logo-text">NETFLICS</span>
+  <svg class="plan-logo-arrow" width="71" height="80" viewBox="0 0 71 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g [attr.filter]="'url(#filter0_d_' + plan.id + ')'">
+      <g [attr.clip-path]="'url(#clip0_' + plan.id + ')'">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M59.2938 29.3313L21.0648 6.06116C14.6645 2.1677 6.7 7.09363 6.7 14.9318V61.4697C6.7 69.3179 14.6645 74.2337 21.0648 70.3403L59.2938 47.0818C65.7421 43.1577 65.7421 33.2554 59.2938 29.3313Z" fill="#6155F5"/>
+        <path d="M7.45 14.9316C7.45007 7.5934 14.8453 3.15623 20.6746 6.70215L58.9041 29.9717C64.8722 33.6036 64.8722 42.8095 58.9041 46.4414L20.6746 69.6992C14.8448 73.2455 7.45004 68.8175 7.45 61.4697V14.9316Z" stroke="white" stroke-opacity="0.45" stroke-width="1.5"/>
+      </g>
+    </g>
+    <defs>
+      <filter [attr.id]="'filter0_d_' + plan.id" x="-2.86102e-06" y="-0.687304" width="70.83" height="80.402" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+        <feOffset dy="2"/>
+        <feGaussianBlur stdDeviation="3.35"/>
+        <feComposite in2="hardAlpha" operator="out"/>
+        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.54 0"/>
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+      </filter>
+      <clipPath [attr.id]="'clip0_' + plan.id">
+        <rect width="57.43" height="67.0024" fill="white" transform="translate(6.7 4.0127)"/>
+      </clipPath>
+    </defs>
+  </svg>
+  <span class="plan-tagline" [style.color]="plan.taglineColor">{{ plan.tagline }}</span>
+</div>
+          </div>
+
+          <div class="plan-divider"></div>
+
+          <div class="plan-price-row">
+            <span class="plan-price-label">Con este plan:</span>
+            <span class="plan-price">$ {{ plan.price.toFixed(2) }}</span>
+          </div>
+
+          <ul class="plan-features">
+            @for (f of features; track f) {
+              <li>{{ f }}</li>
+            }
+          </ul>
+
+          <div class="plan-icons">
+            @for (icon of plan.icons; track icon) {
+              <span class="plan-icon">
+                @switch (icon) {
+                  @case ('hd') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="6" width="20" height="12" rx="2"/><text x="12" y="15" font-size="8" text-anchor="middle" fill="currentColor" stroke="none" font-family="sans-serif" font-weight="700">HD</text></svg>
+                  }
+                  @case ('user-plus') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.5 3-6 6.5-6s6.5 2.5 6.5 6"/><path d="M19 8v6M16 11h6"/></svg>
+                  }
+                  @case ('monitor') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                  }
+                  @case ('captions') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="2"/><text x="12" y="15" font-size="8" text-anchor="middle" fill="currentColor" stroke="none" font-family="sans-serif" font-weight="700">CC</text></svg>
+                  }
+                  @case ('settings') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 0 1-4 0v-.09A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 0 1 0-4h.09A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.55V3a2 2 0 0 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9a1.7 1.7 0 0 0 1.55 1H21a2 2 0 0 1 0 4h-.09a1.7 1.7 0 0 0-1.51 1z"/></svg>
+                  }
+                  @case ('star') {
+                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.9-6.2 3.9 1.6-7L2 9.2l7.1-.6z"/></svg>
+                  }
+                  @case ('fast-forward') {
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 5l8 7-8 7V5zM13 5l8 7-8 7V5z"/></svg>
+                  }
+                  @case ('tv') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 3l4 3 4-3"/></svg>
+                  }
+                  @case ('download') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10a4.5 4.5 0 0 0-3-8 6 6 0 0 0-11 3 4 4 0 0 0 0 8h2"/><path d="M12 12v7M9 16l3 3 3-3"/></svg>
+                  }
+                  @case ('cast') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8a15 15 0 0 1 14 14"/><path d="M2 13a10 10 0 0 1 9 9"/><circle cx="4.5" cy="19.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+                  }
+                  @case ('no-ads') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg>
+                  }
+                  @case ('gem') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l-2 6 5 12 5-12-2-6"/></svg>
+                  }
+                  @case ('tag') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M20.6 12.9L12 21.5a2 2 0 0 1-2.8 0L2.9 15.2a2 2 0 0 1 0-2.8L11.5 3.9 20.6 12.9z"/><path d="M9 3.9h5.5l6.1 6.1"/><circle cx="15" cy="9" r="1.2" fill="currentColor" stroke="none"/></svg>
+                  }
+                  @case ('expand') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+                  }
+                }
+              </span>
+            }
+          </div>
+
+          <div class="plan-divider"></div>
+
+          <button class="plan-cta" (click)="selectPlan(plan.id)">Obtener Plan</button>
+        </div>
+      }
+    </div>
+  </main>
+
+
+  <app-footer></app-footer>
+</div>

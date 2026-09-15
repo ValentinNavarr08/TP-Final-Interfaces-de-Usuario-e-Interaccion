@@ -1,0 +1,122 @@
+<div class="checkout-page">
+  <div class="page-background">
+    <img class="hero-image" src="resources/image.png" alt="" aria-hidden="true" />
+    <div class="page-glow-primary"></div>
+    <div class="page-glow-secondary"></div>
+  </div>
+
+  <main class="checkout-container">
+    <div class="checkout-card">
+      <div class="checkout-logo">
+        <span class="logo-text">NETFLICS</span>
+        <svg class="logo-arrow-icon" width="71" height="80" viewBox="0 0 71 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g filter="url(#filter0_d_checkout_logo)">
+            <g clip-path="url(#clip0_checkout_logo)">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M59.2938 29.3313L21.0648 6.06116C14.6645 2.1677 6.7 7.09363 6.7 14.9318V61.4697C6.7 69.3179 14.6645 74.2337 21.0648 70.3403L59.2938 47.0818C65.7421 43.1577 65.7421 33.2554 59.2938 29.3313Z" fill="#6155F5"/>
+              <path d="M7.45 14.9316C7.45007 7.5934 14.8453 3.15623 20.6746 6.70215L58.9041 29.9717C64.8722 33.6036 64.8722 42.8095 58.9041 46.4414L20.6746 69.6992C14.8448 73.2455 7.45004 68.8175 7.45 61.4697V14.9316Z" stroke="white" stroke-opacity="0.45" stroke-width="1.5"/>
+            </g>
+          </g>
+          <defs>
+            <filter id="filter0_d_checkout_logo" x="-2.86102e-06" y="-0.687304" width="70.83" height="80.402" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+              <feOffset dy="2"/>
+              <feGaussianBlur stdDeviation="3.35"/>
+              <feComposite in2="hardAlpha" operator="out"/>
+              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.54 0"/>
+              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_checkout_logo"/>
+              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_checkout_logo" result="shape"/>
+            </filter>
+            <clipPath id="clip0_checkout_logo">
+              <rect width="57.43" height="67.0024" fill="white" transform="translate(6.7 4.0127)"/>
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="form-separator"></div>
+
+      @if (plan) {
+        <div class="selected-plan-summary" [class]="plan.cardClass">
+          <div class="selected-plan-info">
+            <span class="selected-plan-label">Plan seleccionado</span>
+            <span class="selected-plan-name" [style.color]="plan.taglineColor">{{ plan.tagline }}</span>
+          </div>
+          <span class="selected-plan-price">$ {{ plan.price.toFixed(2) }}<span class="selected-plan-period">/mes</span></span>
+        </div>
+
+        @if (!isSuccess) {
+          <form class="checkout-form" (ngSubmit)="onSubmit()">
+            <div class="form-field">
+              <label for="cardName">Nombre en la tarjeta</label>
+              <input type="text" id="cardName" [(ngModel)]="cardName" name="cardName" placeholder="Como figura en la tarjeta" required />
+            </div>
+
+            <div class="form-field">
+              <label for="cardNumber">Número de tarjeta</label>
+              <input
+                type="text"
+                id="cardNumber"
+                [(ngModel)]="cardNumber"
+                (input)="onCardNumberInput()"
+                name="cardNumber"
+                placeholder="0000 0000 0000 0000"
+                inputmode="numeric"
+                maxlength="19"
+                required
+              />
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="cardExpiry">Vencimiento</label>
+                <input
+                  type="text"
+                  id="cardExpiry"
+                  [(ngModel)]="cardExpiry"
+                  (input)="onExpiryInput()"
+                  name="cardExpiry"
+                  placeholder="MM/AA"
+                  inputmode="numeric"
+                  maxlength="5"
+                  required
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="cardCvv">CVV</label>
+                <input
+                  type="text"
+                  id="cardCvv"
+                  [(ngModel)]="cardCvv"
+                  (input)="onCvvInput()"
+                  name="cardCvv"
+                  placeholder="123"
+                  inputmode="numeric"
+                  maxlength="4"
+                  required
+                />
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary" [disabled]="!isFormValid || isSubmitting">
+              @if (isSubmitting) {
+                Procesando...
+              } @else {
+                Confirmar suscripción — $ {{ plan.price.toFixed(2) }}
+              }
+            </button>
+          </form>
+        } @else {
+          <div class="checkout-success">
+            <p class="checkout-success-title">¡Listo!</p>
+            <p class="checkout-success-text">Tu suscripción al plan {{ plan.tagline }} fue confirmada.</p>
+            <a routerLink="/home" class="btn-primary checkout-success-btn">Ir al inicio</a>
+          </div>
+        }
+      }
+    </div>
+  </main>
+
+  <app-footer></app-footer>
+</div>

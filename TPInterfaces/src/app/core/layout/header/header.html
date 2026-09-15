@@ -1,10 +1,37 @@
 <header class="app-header">
   <div class="page-container header-inner">
-    <div class="header-logo">
-      <span class="logo-text">NETFLICS</span>
-      <svg class="logo-arrow-icon" viewBox="0 0 26 30" fill="currentColor">
-        <path d="M0 0 L26 15 L0 30 Z" />
-      </svg>
+    <div class="header-logo-group">
+      <div class="header-logo">
+        <span class="logo-text">NETFLICS</span>
+        <svg class="logo-arrow-icon" viewBox="0 0 26 30" fill="currentColor">
+          <path d="M0 0 L26 15 L0 30 Z" />
+        </svg>
+      </div>
+
+      <div class="dropdown-wrapper filter-wrapper">
+        <button class="filter-btn" (click)="toggleFilter()">
+          <span>{{ selectedFilter }}</span>
+          <svg class="filter-chevron" [class.open]="isFilterOpen" width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        @if (isFilterOpen) {
+          <div class="dropdown-menu dropdown-filter">
+            <span class="dropdown-arrow"></span>
+
+            @for (option of filterOptions; track option) {
+              <button
+                class="filter-option"
+                [class.active]="option === selectedFilter"
+                (click)="selectFilter(option)"
+              >
+                {{ option }}
+              </button>
+            }
+          </div>
+        }
+      </div>
     </div>
 
     <div class="header-search">
@@ -18,13 +45,74 @@
     </div>
 
     <div class="header-actions">
-  <button class="icon-btn" aria-label="Notificaciones">
-    <img src="resources/campana-header.png" alt="" class="icon-img" />
-    <span class="badge">3</span>
-  </button>
-  <button class="icon-btn" aria-label="Perfil">
-    <img src="resources/user-header.png" alt="" class="icon-img" />
-  </button>
-</div>
+      <div class="dropdown-wrapper">
+        <button class="icon-btn" aria-label="Notificaciones" (click)="toggleNotifications()">
+          <img src="resources/campana-header.png" alt="" class="icon-img" />
+          <span class="badge">{{ notifications.length }}</span>
+        </button>
+
+        @if (isNotificationsOpen) {
+          <div class="dropdown-menu dropdown-notifications">
+            <span class="dropdown-arrow"></span>
+
+            @for (item of notifications; track $index) {
+              <div class="notification-item">
+                <div class="notification-thumb"></div>
+                <div class="notification-info">
+                  <span class="notification-show">{{ item.show }}</span>
+                  <span class="notification-episode">{{ item.episode }}</span>
+                  <span class="notification-status">{{ item.status }}</span>
+                </div>
+              </div>
+              @if (!$last) {
+                <div class="dropdown-separator"></div>
+              }
+            }
+          </div>
+        }
+      </div>
+
+      <div class="dropdown-wrapper">
+        <button class="icon-btn" aria-label="Perfil" (click)="toggleProfileMenu()">
+          <img src="resources/user-header.png" alt="" class="icon-img" />
+        </button>
+
+        @if (isProfileMenuOpen) {
+          <div class="dropdown-menu dropdown-profile">
+            <span class="dropdown-arrow"></span>
+
+            <button class="profile-row">
+              <span class="profile-avatar"></span>
+              <span class="profile-name">Perfil 1</span>
+            </button>
+
+            <button class="profile-row">
+              <span class="profile-avatar"></span>
+              <span class="profile-name">Perfil 2</span>
+            </button>
+
+            <button class="profile-row">
+              <span class="profile-avatar profile-avatar-add">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 5v14M5 12h14" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="profile-name">Crear perfil</span>
+            </button>
+
+            <div class="dropdown-separator"></div>
+
+            <nav class="profile-menu-list">
+              <a href="#" class="profile-menu-link">Editar perfiles</a>
+              <a href="#" class="profile-menu-link">Gustos y preferencias</a>
+              <a href="#" class="profile-menu-link">Mi suscripción</a>
+              <a href="#" class="profile-menu-link">Mi cuenta</a>
+              <a href="/ayuda" class="profile-menu-link">Ayuda</a>
+              <a href="#" class="profile-menu-link">Cerrar sesión</a>
+            </nav>
+          </div>
+        }
+      </div>
+    </div>
   </div>
 </header>

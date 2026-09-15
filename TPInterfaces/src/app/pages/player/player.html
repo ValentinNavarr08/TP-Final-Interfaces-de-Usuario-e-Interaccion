@@ -1,0 +1,138 @@
+<div class="player-page" #playerRoot>
+  <div class="player-media">
+    <img class="player-video" [src]="posterUrl" [alt]="title" />
+
+    <div class="player-loading" [class.visible]="isLoading">
+      <div class="player-loading-spinner"></div>
+    </div>
+  </div>
+
+  <div class="player-header" [class.hidden]="!controlsVisible">
+    <button class="player-back-btn" (click)="goBack()" aria-label="Volver">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+    </button>
+
+    <div class="player-title-group">
+      <h1 class="player-title">{{ title }}</h1>
+      <span class="player-episode-code">{{ episodeCode }}</span>
+    </div>
+  </div>
+
+  @if (!showEpisodeRating) {
+    <div class="player-controls" [class.hidden]="!controlsVisible">
+      <div class="player-progress-bar" (click)="seek($event)">
+        <div class="player-progress-filled" [style.width.%]="progressPercent"></div>
+        <div class="player-progress-knob" [style.left.%]="progressPercent"></div>
+      </div>
+
+      <div class="player-controls-row">
+        <div class="player-controls-left">
+          <button class="player-btn" (click)="togglePlay()" [attr.aria-label]="isPlaying ? 'Pausar' : 'Reproducir'">
+            @if (isPlaying) {
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="5" width="4" height="14" rx="1.5"/>
+                <rect x="14" y="5" width="4" height="14" rx="1.5"/>
+              </svg>
+            } @else {
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            }
+          </button>
+
+          <div class="player-volume-group">
+            <button class="player-btn" (click)="toggleMute()" [attr.aria-label]="isMuted ? 'Activar sonido' : 'Silenciar'">
+              @if (isMuted) {
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11 5 6 9H2v6h4l5 4V5z"/>
+                  <line x1="23" y1="9" x2="17" y2="15"/>
+                  <line x1="17" y1="9" x2="23" y2="15"/>
+                </svg>
+              } @else {
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11 5 6 9H2v6h4l5 4V5z"/>
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                </svg>
+              }
+            </button>
+
+            <span class="player-time">{{ currentTimeLabel }} / {{ durationLabel }}</span>
+          </div>
+        </div>
+
+        <div class="player-controls-right">
+          <button class="player-btn" (click)="skipNext()" aria-label="Siguiente episodio">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6 5v14l8.5-7z"/>
+              <rect x="16" y="5" width="3" height="14" rx="1"/>
+            </svg>
+          </button>
+
+          <button class="player-btn" [class.active]="isSubtitlesOn" (click)="toggleSubtitles()" aria-label="Subtítulos">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="5" width="20" height="14" rx="2"/>
+              <line x1="6" y1="10" x2="10" y2="10"/>
+              <line x1="6" y1="14" x2="14" y2="14"/>
+              <line x1="13" y1="10" x2="18" y2="10"/>
+              <line x1="16" y1="14" x2="18" y2="14"/>
+            </svg>
+          </button>
+
+          <button class="player-btn" (click)="toggleFullscreen()" aria-label="Pantalla completa">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3"/>
+              <path d="M21 8V5a2 2 0 0 0-2-2h-3"/>
+              <path d="M3 16v3a2 2 0 0 0 2 2h3"/>
+              <path d="M16 21h3a2 2 0 0 0 2-2v-3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (showEpisodeRating) {
+    <div class="player-rating-overlay">
+      <div class="player-rating-backdrop"></div>
+
+      <div class="player-rating-content">
+        <h2 class="player-rating-title">¿Qué te pareció este episodio?</h2>
+        <h2 class="player-rating-subtitle">Calificálo</h2>
+
+        <div class="player-review-wrap">
+          <div class="player-review-stars">
+            @for (n of [1,2,3,4,5]; track n) {
+              <button
+                class="player-review-star-btn"
+                type="button"
+                (click)="setEpisodeRating(n)"
+                (mouseenter)="hoveredRatingStar = n"
+                (mouseleave)="hoveredRatingStar = 0"
+                [attr.aria-label]="n + ' estrellas'"
+              >
+                <svg width="28" height="27" viewBox="0 0 25 24" [attr.fill]="(hoveredRatingStar || episodeRating) >= n ? 'currentColor' : 'none'" stroke="currentColor" stroke-width="1.8" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11.1089 2.1521C11.3968 1.50539 11.5409 1.18204 11.7414 1.08246C11.9156 0.99595 12.1201 0.99595 12.2942 1.08246C12.4948 1.18204 12.6388 1.50539 12.9268 2.1521L15.2207 7.30319C15.3059 7.49437 15.3485 7.58996 15.4144 7.66317C15.4726 7.72794 15.5439 7.77975 15.6234 7.81521C15.7133 7.8553 15.8173 7.86629 16.0253 7.88825L21.6286 8.48021C22.3321 8.55452 22.6837 8.59167 22.8404 8.75179C22.9763 8.89086 23.0395 9.0856 23.0112 9.27815C22.9786 9.49979 22.7158 9.73674 22.1904 10.2108L18.0048 13.9863C17.8495 14.1264 17.7718 14.1965 17.7226 14.2818C17.6791 14.3574 17.6518 14.4412 17.6428 14.5278C17.6324 14.6258 17.6541 14.7282 17.6975 14.933L18.8666 20.4499C19.0134 21.1426 19.0868 21.4888 18.983 21.6873C18.8928 21.8599 18.7274 21.9802 18.5357 22.0127C18.315 22.05 18.0086 21.8732 17.3958 21.5195L12.5151 18.7017C12.3339 18.5971 12.2434 18.5449 12.1471 18.5244C12.0619 18.5063 11.9738 18.5063 11.8886 18.5244C11.7923 18.5449 11.7017 18.5971 11.5206 18.7017L6.63987 21.5195C6.02711 21.8732 5.72073 22.05 5.50004 22.0127C5.30832 21.9802 5.14283 21.8599 5.05271 21.6873C4.94898 21.4888 5.02236 21.1426 5.16914 20.4499L6.33818 14.933C6.38157 14.7282 6.40327 14.6258 6.39297 14.5278C6.38385 14.4412 6.35664 14.3574 6.3131 14.2818C6.2639 14.1965 6.18623 14.1264 6.03089 13.9863L1.84536 10.2108C1.31989 9.73674 1.05715 9.49979 1.02448 9.27815C0.99612 9.0856 1.05933 8.89086 1.19534 8.75179C1.35194 8.59167 1.70367 8.55452 2.40714 8.48021L8.01041 7.88825C8.21837 7.86629 8.32235 7.8553 8.41226 7.81521C8.49181 7.77975 8.56304 7.72794 8.62134 7.66317C8.68721 7.58996 8.72978 7.49437 8.81493 7.30319L11.1089 2.1521Z"/>
+                </svg>
+              </button>
+            }
+          </div>
+
+          <fieldset class="player-review-fieldset">
+            <legend class="player-review-legend">Reseña</legend>
+            <textarea
+              class="player-review-textarea"
+              [(ngModel)]="reviewText"
+              placeholder="Escribí tu reseña..."
+              rows="4"
+            ></textarea>
+          </fieldset>
+
+          <button class="player-review-submit" (click)="submitEpisodeReview()">Enviar</button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

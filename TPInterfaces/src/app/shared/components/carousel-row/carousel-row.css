@@ -8,8 +8,8 @@
     calc((100vw - var(--page-max-width)) / 2 + var(--page-padding))
   );
   padding-right: 0;
-  padding-top: clamp(12px, 2vw, 32px);
-  padding-bottom: clamp(8px, 1.5vw, 24px);
+  padding-top: clamp(8px, 1.2vw, 18px);
+  padding-bottom: clamp(4px, 0.8vw, 12px);
   display: flex;
   flex-direction: column;
   isolation: isolate;
@@ -17,7 +17,7 @@
 
 .carousel-title {
   position: relative;
-  top: clamp(10px, 2vw, 30px);
+  top: clamp(6px, 1.2vw, 16px);
   left: 50px;
   font-family: var(--font-principal);
   font-weight: 400;
@@ -28,7 +28,12 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  margin: 0 0 16px 0;
+  margin: 0 0 8px 0;
+}
+
+.carousel-viewport {
+  width: 100%;
+  overflow: hidden;
 }
 
 .carousel-track {
@@ -37,6 +42,7 @@
   align-items: center;
   gap: 0.65%;
   overflow-x: auto;
+  scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
 }
@@ -60,17 +66,20 @@
   display: flex;
   flex-direction: row;
   gap: 12px;
-  padding: 10px var(--page-padding) 10px 0;
+  padding: 6px var(--page-padding) 6px 0;
   align-self: flex-end;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .carousel-dots .dot {
   width: 8px;
   height: 8px;
+  padding: 0;
   border-radius: 50px;
+  border: 0;
   background: linear-gradient(0deg, rgba(94, 94, 94, 0.18), rgba(94, 94, 94, 0.18)), rgba(255, 255, 255, 0.07);
   background-blend-mode: color-dodge, normal;
+  cursor: pointer;
 }
 
 .carousel-dots .dot.active {

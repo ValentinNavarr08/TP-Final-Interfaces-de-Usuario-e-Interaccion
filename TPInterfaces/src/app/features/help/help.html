@@ -1,0 +1,65 @@
+<div class="help-page">
+  <div class="page-background">
+    <div class="page-glow-1"></div>
+    <div class="page-glow-2"></div>
+    <div class="page-glow-3"></div>
+  </div>
+
+  <main class="help-content page-container">
+    <div class="help-hero">
+      <img class="help-logo" src="resources/logo-form.png" alt="Netflics" />
+      <h1 class="help-heading">¿En qué podemos ayudarte?</h1>
+    </div>
+
+    <div class="help-search-wrap">
+      <input
+        class="help-search"
+        type="search"
+        placeholder="Buscar pregunta"
+        [value]="search"
+        (input)="onSearchInput($event)"
+      />
+    </div>
+
+    @for (section of filteredSections; track section.id) {
+      <section class="faq-section">
+        <div class="faq-section-header">
+          <h2 class="faq-section-title">{{ section.title }}</h2>
+          <div class="faq-section-line"></div>
+        </div>
+
+        <div class="faq-list">
+          @for (item of section.items; track item.id) {
+            <article class="faq-item" [class.is-open]="isExpanded(item.id)">
+              <button class="faq-header" type="button" (click)="toggleQuestion(item.id)">
+                <span class="faq-title">{{ item.question }}</span>
+                <span class="faq-icon" aria-hidden="true">
+                  <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.5 8.5L11 14L16.5 8.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </button>
+
+              @if (isExpanded(item.id)) {
+                <div class="faq-panel">
+                  <div class="faq-divider"></div>
+                  <div class="faq-body">
+                    @for (paragraph of item.answer; track paragraph) {
+                      <p>{{ paragraph }}</p>
+                    }
+                  </div>
+                </div>
+              }
+            </article>
+          }
+        </div>
+      </section>
+    }
+
+    @if (!hasResults) {
+      <p class="faq-empty">No encontramos preguntas que coincidan con tu búsqueda.</p>
+    }
+  </main>
+
+  <app-footer></app-footer>
+</div>

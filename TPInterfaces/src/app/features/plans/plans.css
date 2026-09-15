@@ -1,0 +1,294 @@
+:host {
+  display: block;
+}
+.hero-image {
+  position: absolute;
+  top: 0;
+  right: -10rem;
+  width: 70%;
+  height: auto;
+  object-fit: cover;
+  object-position: top right;
+  transform: scaleX(-1);
+}
+
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(41.96% 39.84% at 4.59% 38.92%, rgba(54, 52, 163, 0.37) 0%, rgba(193, 193, 222, 0) 100%),
+    linear-gradient(to bottom, rgba(20,20,20,0.1) 0%, rgba(20,20,20,0.95) 85%),
+    linear-gradient(to right, rgba(20,20,20,0.95) 0%, rgba(20,20,20,0.2) 45%, rgba(20,20,20,0) 70%);
+}
+
+.plans-page {
+  position: relative;
+  overflow: hidden;
+}
+
+.plans-header {
+  position: relative;
+  z-index: 1;
+  padding: 40px 0 0;
+  display: flex;
+  justify-content: center;
+}
+
+
+.plans-content {
+  position: relative;
+  z-index: 1;
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding: clamp(24px, 4vw, 56px) var(--page-padding) clamp(40px, 5vw, 80px);
+}
+
+.plans-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  font-family: var(--font-logo);
+  font-weight: 600;
+  font-size: clamp(36px, 5vw, 56px);
+  letter-spacing: -0.115em;
+  background: linear-gradient(90deg, var(--color-purple-bright), var(--color-purple-medium));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  z-index: 2;
+}
+
+.logo-arrow-icon {
+  width: clamp(32px, 4vw, 48px);
+  height: auto;
+  margin-left: clamp(-14px, -1.8vw, -10px);
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.plan-card-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.plan-logo-text {
+  font-family: var(--font-logo);
+  font-weight: 600;
+  font-size: clamp(28px, 3vw, 40px);
+  letter-spacing: -0.115em;
+  background: linear-gradient(90deg, var(--color-purple-bright), var(--color-purple-medium));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  z-index: 2;
+}
+
+.plan-logo-arrow {
+  width: clamp(24px, 2.6vw, 34px);
+  height: auto;
+  margin-left: clamp(-10px, -1.2vw, -7px);
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.plan-tagline {
+  font-family: var(--font-principal);
+  font-weight: 300;
+  font-size: clamp(18px, 1.8vw, 24px);
+  letter-spacing: 3px;
+  margin-left: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+.plans-title {
+  font-family: var(--font-principal);
+  font-weight: 400;
+  font-size: clamp(36px, 5vw, 60px);
+  letter-spacing: -0.25px;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.16) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0 0 32px;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(20px, 2.5vw, 40px);
+}
+
+@media (max-width: 900px) {
+  .plans-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.plan-card {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: clamp(40px, 4.5vw, 70px) clamp(20px, 2.5vw, 37px);
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.plan-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.252) 40%);
+  pointer-events: none;
+}
+
+.plan-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.plan-card-silver {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.plan-card-silver:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.plan-card-gold {
+  background: rgba(54, 52, 163, 0.18);
+  border-color: rgba(255, 204, 0, 0.25);
+}
+
+.plan-card-gold:hover {
+  border-color: rgba(255, 204, 0, 0.5);
+}
+
+.plan-card-emerald {
+  background: rgba(74, 222, 128, 0.07);
+  border-color: rgba(74, 222, 128, 0.25);
+}
+
+.plan-card-emerald:hover {
+  border-color: rgba(74, 222, 128, 0.5);
+}
+
+.plan-card-diamond {
+  background: rgba(103, 232, 249, 0.07);
+  border-color: rgba(103, 232, 249, 0.25);
+}
+
+.plan-card-diamond:hover {
+  border-color: rgba(103, 232, 249, 0.5);
+}
+
+.plan-divider {
+  width: 90%;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(123, 121, 225, 0.31) 0%, rgba(67, 66, 123, 0.31) 100%);
+  border-radius: 100px;
+  margin: 4px 0;
+}
+
+.plan-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 8px;
+}
+
+.plan-price-label {
+  font-family: var(--font-principal);
+  font-weight: 700;
+  font-size: clamp(15px, 1.4vw, 20px);
+  color: #FFFFFF;
+}
+
+.plan-price {
+  font-family: var(--font-principal);
+  font-weight: 700;
+  font-size: clamp(26px, 2.6vw, 36px);
+  color: #FFFFFF;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+.plan-features {
+  list-style: none;
+  margin: 4px 0;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.plan-features li {
+  font-family: var(--font-principal);
+  font-weight: 300;
+  font-size: clamp(14px, 1.2vw, 18px);
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.plan-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(10px, 1.2vw, 16px);
+  color: var(--color-accent-purple);
+  margin: 4px 0;
+}
+
+.plan-icon svg {
+  width: clamp(22px, 2.2vw, 30px);
+  height: clamp(22px, 2.2vw, 30px);
+  display: block;
+}
+
+.plan-cta {
+  width: 90%;
+  padding: 16px;
+  background: var(--color-dark-navy);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  font-family: var(--font-principal);
+  font-size: clamp(16px, 1.5vw, 20px);
+  cursor: pointer;
+}
+
+.plan-cta:hover {
+  filter: brightness(1.2);
+}
+
+.plans-footer-separator {
+  height: 2px;
+  background: linear-gradient(90deg, rgba(123, 121, 225, 0.4) 0%, rgba(67, 66, 123, 0.4) 100%);
+  border-radius: 100px;
+  margin-bottom: 24px;
+}

@@ -1,4 +1,3 @@
-
 .home-page {
   position: relative;
   width: 100%;
@@ -34,9 +33,9 @@
   opacity: 0.55;
   z-index: -1;
   border-radius: 45.5px;
+  pointer-events: none;
 }
 
-/* Imagen principal nítida */
 .hero-carousel-image {
   position: absolute;
   inset: 0;
@@ -48,7 +47,6 @@
   border-radius: 45.5px;
 }
 
-/* Overlay sutil violeta + blur sobre la imagen (del spec: rgba(123,121,225,0.04), blur 6.4px) */
 .hero-overlay-tint {
   position: absolute;
   inset: 0;
@@ -58,12 +56,11 @@
   border-radius: 45.5px;
 }
 
-/* Contenido del hero: padding interno, slogan abajo a la izquierda */
 .hero-content {
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 1.43% 8.6%; /* 20px / 1396 vertical, 120px / 1396 horizontal */
+  padding: 1.43% 8.6%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -100,27 +97,32 @@
 .hero-cta {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: clamp(10px, 1.5vw, 20px);
   width: fit-content;
-  background-color: var(--color-dark-navy);
-  color: var(--color-text-primary);
-  border: none;
-  border-radius: 9999px;
-  padding: 20px 36px;
+  background: rgba(0, 0, 0, 0.73);
+  color: #FFFFFF;
+  border: 1px solid #353843;
+  border-radius: 10px;
+  padding: clamp(12px, 1.6vw, 20px) clamp(18px, 2.4vw, 32px);
   font-family: var(--font-principal);
-  font-size: 16px;
-  font-weight: 600;
+  font-size: clamp(16px, 1.8vw, 22px);
+  font-weight: 500;
   cursor: pointer;
-  box-shadow:
-    0 8px 10px -6px rgba(0, 0, 0, 0.1),
-    0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+  height: clamp(48px, 4vw, 58px);
+  box-sizing: border-box;
 }
 
 .hero-cta:hover {
   filter: brightness(1.15);
 }
 
-/* Dots del slider */
+.hero-cta svg {
+  width: clamp(20px, 2vw, 26px);
+  height: clamp(22px, 2.2vw, 29px);
+  flex-shrink: 0;
+}
+
 .hero-dots {
   position: absolute;
   bottom: 24px;
@@ -294,5 +296,82 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ===== Catálogo (Películas / Series) ===== */
+.catalog-page {
+  position: relative;
+  z-index: 1;
+  padding: 0 0 40px;
+}
+
+.catalog-toolbar {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  padding: 20px 41px 28px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 200px;
+  flex-shrink: 0;
+}
+
+.filter-group label {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.catalog-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 18px;
+  padding-top: 8px;
+}
+
+.catalog-grid > app-card {
+  display: block;
+  flex: 1 1 calc(25% - 18px);
+  min-width: 180px;
+  max-width: calc(25% - 18px);
+}
+
+@media (max-width: 1100px) {
+  .catalog-grid > app-card {
+    flex-basis: calc(33.333% - 18px);
+    max-width: calc(33.333% - 18px);
+  }
+}
+
+@media (max-width: 900px) {
+  .catalog-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group {
+    min-width: 0;
+  }
+
+  .catalog-grid > app-card {
+    flex-basis: calc(50% - 18px);
+    max-width: calc(50% - 18px);
+  }
+}
+
+@media (max-width: 560px) {
+  .catalog-grid {
+    justify-content: center;
+  }
+
+  .catalog-grid > app-card {
+    flex-basis: 100%;
+    max-width: 290px;
   }
 }

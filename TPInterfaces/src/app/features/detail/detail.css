@@ -1,0 +1,635 @@
+:host {
+  display: block;
+}
+
+.detail-page {
+  position: relative;
+  width: 100%;
+}
+
+/* ===== Hero ===== */
+.detail-hero {
+  position: relative;
+  width: 100%;
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  isolation: isolate;
+}
+
+.detail-hero-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1396 / 682;
+  overflow: hidden;
+  border-radius: 0 0 70px 70px;
+  box-shadow: 6px 5px 21.2px -6px rgba(123, 121, 225, 0.38);
+}
+
+.detail-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.detail-hero-fade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0%, rgba(32, 30, 101, 0.2) 55%, rgba(20, 20, 20, 0.9) 100%);
+  pointer-events: none;
+}
+
+.back-btn {
+  position: absolute;
+  top: clamp(16px, 2vw, 32px);
+  left: clamp(16px, 2vw, 32px);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  border: none;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.back-btn:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* ===== Fila de acciones — posicionada SOBRE la imagen, dentro del hero-media ===== */
+.detail-actions-row {
+  position: absolute;
+  left: 7.16%;
+  top: 79.03%;
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1vw, 16px);
+  z-index: 2;
+}
+
+.play-btn {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.5vw, 20px);
+  background: rgba(0, 0, 0, 0.73);
+  color: #FFFFFF;
+  border: 1px solid #353843;
+  border-radius: 10px;
+  padding: clamp(12px, 1.6vw, 20px) clamp(18px, 2.4vw, 32px);
+  font-family: var(--font-principal);
+  font-size: clamp(16px, 1.8vw, 22px);
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
+  height: clamp(48px, 4vw, 58px);
+  box-sizing: border-box;
+}
+
+.play-btn:hover {
+  filter: brightness(1.15);
+}
+
+.play-icon {
+  width: clamp(20px, 2vw, 26px);
+  height: clamp(22px, 2.2vw, 29px);
+  flex-shrink: 0;
+}
+
+.round-btn {
+  width: clamp(48px, 4vw, 58px);
+  height: clamp(48px, 4vw, 58px);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background:
+    radial-gradient(181.06% 153.78% at -1.52% 100%, rgba(54, 52, 163, 0.3367) 0%, rgba(193, 193, 222, 0) 100%),
+    rgba(0, 0, 0, 0.73);
+  border: 1px solid #353843;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.round-btn.active {
+  color: var(--color-accent-purple);
+}
+
+.round-btn:hover {
+  filter: brightness(1.2);
+}
+
+.detail-synopsis {
+  position: absolute;
+  left: 44.77%;
+  top: 79.5%;
+  width: 45%;
+  font-family: var(--font-principal);
+  font-size: clamp(13px, 1.15vw, 17px);
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0px 3px 1.5px rgba(0, 0, 0, 0.6);
+  margin: 0;
+  z-index: 2;
+}
+
+/* ===== Título + separador + meta ===== */
+.detail-content {
+  padding-top: clamp(32px, 4vw, 56px);
+}
+
+.detail-title-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.detail-title {
+  font-family: var(--font-principal);
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 80px);
+  line-height: 1;
+  letter-spacing: -0.25px;
+  color: #FFFFFF;
+  margin: 0;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.detail-meta-wrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.detail-separator {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 4px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, #7B79E1 0%, #43427B 100%);
+  border-radius: 100px;
+  z-index: 2;
+}
+
+.detail-meta {
+  position: relative;
+  top: -0.375em;
+  z-index: 1;
+  font-family: var(--font-principal);
+  font-size: clamp(26px, 3.2vw, 42px);
+  color: var(--color-brand-purple);
+  margin-left: auto;
+  padding-left: 12px;
+  flex-shrink: 0;
+}
+
+/* ===== Selector de temporada ===== */
+.season-wrapper {
+  display: inline-block;
+  margin: 32px 0 24px;
+}
+
+.season-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background:
+    radial-gradient(181.06% 153.78% at -1.52% 100%, rgba(54, 52, 163, 0.3367) 0%, rgba(193, 193, 222, 0) 100%),
+    rgba(0, 0, 0, 0.73);
+  border: 1px solid #353843;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  padding: 16px 24px;
+  font-family: var(--font-principal);
+  font-size: 20px;
+  font-weight: 500;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.season-chevron {
+  transition: transform 0.2s ease;
+}
+
+.season-chevron.open {
+  transform: rotate(180deg);
+}
+
+.dropdown-wrapper {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  width: 200px;
+  box-sizing: border-box;
+  padding: 8px;
+  background:
+    radial-gradient(181.06% 153.78% at -1.52% 100%, rgba(54, 52, 163, 0.3367) 0%, rgba(193, 193, 222, 0) 100%),
+    rgba(0, 0, 0, 0.85);
+  border: 1px solid #353843;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  z-index: 10;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  top: -8px;
+  left: 24px;
+  width: 16px;
+  height: 12px;
+  background: #101116;
+  border: 1px solid #353843;
+  border-bottom: none;
+  border-right: none;
+  transform: rotate(45deg);
+}
+
+.season-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-principal);
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 10px 12px;
+  border-radius: 6px;
+}
+
+.season-option:hover {
+  background: rgba(123, 121, 225, 0.15);
+}
+
+.season-option.active {
+  color: #FFFFFF;
+  font-weight: 600;
+  background: rgba(123, 121, 225, 0.25);
+}
+
+/* ===== Lista de episodios ===== */
+.episode-list {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: clamp(40px, 5vw, 80px);
+}
+
+.episode-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2vw, 32px);
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: clamp(12px, 1.5vw, 20px);
+  margin-bottom: 16px;
+}
+
+/* Cuando el episodio tiene el panel de comentarios justo debajo,
+   se "sueldan" en una sola card: se le sacan las esquinas inferiores
+   y el margen que los separaba */
+.episode-row:has(+ .comments-panel) {
+  border-radius: 20px 20px 0 0;
+  margin-bottom: 0;
+}
+
+.episode-thumb {
+  width: clamp(160px, 20vw, 304px);
+  aspect-ratio: 304 / 183;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 0 2px 4px 0;
+  border-color: #000000;
+}
+
+.episode-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.episode-code {
+  font-family: var(--font-principal);
+  font-weight: 400;
+  font-size: clamp(24px, 2.8vw, 36px);
+  letter-spacing: -0.25px;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.5) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0;
+}
+
+.episode-duration {
+  font-family: var(--font-principal);
+  font-size: clamp(14px, 1.2vw, 18px);
+  color: var(--color-purple-bright);
+}
+
+.episode-description {
+  font-family: var(--font-principal);
+  font-weight: 300;
+  font-size: clamp(14px, 1.3vw, 18px);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 4px 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+}
+
+/* ===== Rating por estrellas ===== */
+.star-rating {
+  position: relative;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 4px;
+  display: flex;
+  gap: 4px;
+}
+
+.star-slot {
+  position: relative;
+  width: 22px;
+  height: 21px;
+  flex-shrink: 0;
+}
+
+.star-bg,
+.star-fill svg {
+  display: block;
+  width: 22px;
+  height: 21px;
+}
+
+.star-bg path {
+  fill: rgba(255, 255, 255, 0.2);
+  stroke: rgba(255, 255, 255, 0.2);
+}
+
+.star-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.star-fill path {
+  fill: var(--color-accent-purple);
+  stroke: var(--color-accent-purple);
+}
+
+/* ===== Hover del thumbnail (botón play) ===== */
+.episode-thumb-wrap {
+  position: relative;
+  width: clamp(160px, 20vw, 304px);
+  aspect-ratio: 304 / 183;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.episode-thumb-wrap .episode-thumb {
+  width: 100%;
+  height: 100%;
+}
+
+.episode-play-btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.episode-play-btn:hover {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+/* ===== Botón "Ver comentarios" ===== */
+.comments-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  margin-top: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #353843;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: var(--font-principal);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  width: fit-content;
+}
+
+.comments-toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.comments-toggle-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.comments-toggle-btn svg.rotated {
+  transform: rotate(90deg);
+}
+
+/* ===== Panel de comentarios ===== */
+/* Mismo fondo que .episode-row y esquinas inferiores redondeadas:
+   queda "soldado" a la card del episodio en vez de flotar aparte */
+.comments-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 20px 20px;
+  margin-bottom: 16px;
+  padding: 8px clamp(12px, 1.5vw, 20px) 28px
+    calc(clamp(12px, 1.5vw, 20px) + clamp(160px, 20vw, 304px) + clamp(16px, 2vw, 32px));
+}
+
+.comment-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.comment-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #7B79E1 0%, #3A3880 100%);
+  flex-shrink: 0;
+}
+
+.comment-body {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #353843;
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+
+.comment-body::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 16px;
+  width: 12px;
+  height: 12px;
+  background: #101116;
+  border-left: 1px solid #353843;
+  border-bottom: 1px solid #353843;
+  transform: rotate(45deg);
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.comment-username {
+  font-family: var(--font-principal);
+  font-size: 16px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.comment-stars {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.mini-star-slot {
+  position: relative;
+  width: 15px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* Sobreescribe el tamaño global de estrellas solo para las mini */
+.mini-star-slot .star-bg,
+.mini-star-slot .star-fill svg {
+  width: 15px;
+  height: 14px;
+}
+
+.comment-text {
+  margin: 0;
+  font-family: var(--font-principal);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ===== Formulario de reseña ===== */
+.review-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.review-form-label {
+  font-family: var(--font-principal);
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+.review-form-stars {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.review-star-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.3);
+  display: flex;
+}
+
+.review-star-btn:hover {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.review-form-textarea {
+  flex-basis: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid #353843;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-family: var(--font-principal);
+  font-size: 14px;
+  color: #FFFFFF;
+}
+
+.review-form-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.review-form-submit {
+  flex-basis: auto;
+  margin-left: auto;
+  background: var(--color-accent-purple);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-family: var(--font-principal);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.review-form-submit:hover {
+  filter: brightness(1.1);
+}

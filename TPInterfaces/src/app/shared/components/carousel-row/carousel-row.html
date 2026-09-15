@@ -1,17 +1,26 @@
 <section class="carousel-section">
   <h2 class="carousel-title">{{ title }}</h2>
 
-  <div class="carousel-track" [class.featured]="featured">
-    @for (item of items; track item.id) {
-      <app-card [item]="item" />
-    }
+  <div class="carousel-viewport">
+    <div #track class="carousel-track" [class.featured]="featured">
+      @for (item of items; track item.id) {
+        <app-card [item]="item" />
+      }
+    </div>
   </div>
 
   @if (showDots) {
     <div class="carousel-dots">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
+      @for (page of pageIndexes; track page) {
+        <button
+          type="button"
+          class="dot"
+          [class.active]="currentPage === page"
+          [attr.aria-label]="'Ir a la página ' + (page + 1)"
+          [attr.aria-current]="currentPage === page ? 'page' : null"
+          (click)="selectPage(page)"
+        ></button>
+      }
     </div>
   }
 </section>

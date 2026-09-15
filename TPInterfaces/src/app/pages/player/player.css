@@ -1,0 +1,384 @@
+:host {
+  display: block;
+}
+
+.player-page {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1431 / 716;
+  background: #121317;
+  overflow: hidden;
+}
+
+/* ===== Video / poster ===== */
+.player-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #000000;
+}
+
+.player-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== Spinner de carga ===== */
+/* Reemplaza el "molecule/loading" de Figma: mismo conic-gradient,
+   pero recortado a un anillo con mask en vez de usar un SVG externo */
+.player-loading {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 2;
+}
+
+.player-loading.visible {
+  opacity: 1;
+}
+
+.player-loading-spinner {
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  background: conic-gradient(
+    from -31.33deg at 79.39% 34.21%,
+    rgba(3, 122, 235, 0.9) -71.43deg,
+    #11FFFF 7.22deg,
+    #FFFFFF 118.12deg,
+    #FFFFFF 231.58deg,
+    rgba(3, 122, 235, 0.9) 288.57deg,
+    #11FFFF 367.22deg
+  );
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 6px), #000 calc(100% - 6px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 6px), #000 calc(100% - 6px));
+  animation: player-spin 0.9s linear infinite;
+}
+
+@keyframes player-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== Header ===== */
+.player-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: clamp(20px, 3vw, 32px) clamp(16px, 2vw, 24px);
+  background: radial-gradient(94.86% 89.82% at 44.1% 0%, rgba(54, 52, 163, 0.7) 0%, rgba(193, 193, 222, 0) 100%);
+  backdrop-filter: blur(7.5px);
+  -webkit-backdrop-filter: blur(7.5px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 3;
+}
+
+.player-header.hidden {
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+}
+
+.player-back-btn {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.player-back-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.player-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.player-title {
+  margin: 0;
+  font-family: var(--font-principal);
+  font-weight: 700;
+  font-size: clamp(22px, 2.5vw, 30px);
+  line-height: 36px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.player-episode-code {
+  font-family: var(--font-principal);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ===== Barra de controles ===== */
+.player-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40px clamp(16px, 2vw, 24px) clamp(16px, 2vw, 24px);
+  background: radial-gradient(65.76% 75.02% at 50% 100%, rgba(54, 52, 163, 0.37) 0%, rgba(193, 193, 222, 0) 100%);
+  backdrop-filter: blur(7.5px);
+  -webkit-backdrop-filter: blur(7.5px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 3;
+}
+
+.player-controls.hidden {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+/* Progress bar */
+.player-progress-bar {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  margin-bottom: 24px;
+  background: linear-gradient(0deg, rgba(94, 94, 94, 0.2), rgba(94, 94, 94, 0.2)), rgba(255, 255, 255, 0.07);
+  background-blend-mode: color-dodge, lighten;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.player-progress-filled {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: #3634A3;
+  border-radius: 100px;
+  pointer-events: none;
+}
+
+.player-progress-knob {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  box-sizing: border-box;
+  background: #3634A3;
+  border: 0.8px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.player-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.player-controls-left {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2vw, 32px);
+}
+
+.player-volume-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.player-controls-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2vw, 32px);
+}
+
+.player-btn {
+  width: clamp(40px, 3.8vw, 46px);
+  height: clamp(40px, 3.8vw, 46px);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+
+.player-btn svg {
+  width: clamp(26px, 2.6vw, 32px);
+  height: clamp(26px, 2.6vw, 32px);
+}
+
+.player-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.player-btn.active {
+  color: var(--color-accent-purple);
+}
+
+.player-time {
+  font-family: var(--font-principal);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+
+/* ===== Pantalla "¿Qué te pareció este episodio?" ===== */
+.player-rating-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.player-rating-backdrop {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(4.9px);
+  -webkit-backdrop-filter: blur(4.9px);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.69) 3.61%, rgba(0, 0, 0, 0.3105) 39.9%),
+    linear-gradient(0deg, rgba(97, 85, 245, 0.05), rgba(97, 85, 245, 0.05));
+}
+
+.player-rating-content {
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.player-rating-title,
+.player-rating-subtitle {
+  margin: 0;
+  font-family: var(--font-principal);
+  font-weight: 400;
+  font-size: clamp(26px, 3.4vw, 44px);
+  line-height: 1.45;
+  letter-spacing: -0.25px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.player-review-wrap {
+  position: relative;
+  width: min(545px, 90vw);
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.player-review-stars {
+  display: flex;
+  gap: 6px;
+}
+
+.player-review-star-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #444444;
+  display: flex;
+}
+
+.player-review-star-btn:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* El <legend> nativo corta el borde superior solo, sin hacks de máscaras */
+.player-review-fieldset {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  background:
+    radial-gradient(181.06% 153.78% at -1.52% 100%, rgba(54, 52, 163, 0.2109) 0%, rgba(193, 193, 222, 0) 100%),
+    rgba(0, 0, 0, 0.51);
+  border: 1px solid #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 20px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  padding: 4px 20px 16px;
+}
+
+.player-review-legend {
+  padding: 0 8px;
+  margin-left: 8px;
+  font-family: var(--font-principal);
+  font-size: 18px;
+  color: #FFFFFF;
+}
+
+.player-review-textarea {
+  width: 100%;
+  min-height: 90px;
+  box-sizing: border-box;
+  resize: vertical;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: var(--font-principal);
+  font-size: 16px;
+  color: #FFFFFF;
+}
+
+.player-review-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.player-review-submit {
+  width: 156px;
+  height: 40px;
+  flex-shrink: 0;
+  background:
+    radial-gradient(181.06% 153.78% at -1.52% 100%, rgba(54, 52, 163, 0.3367) 0%, rgba(193, 193, 222, 0) 100%),
+    rgba(0, 0, 0, 0.73);
+  border: 1px solid #353843;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  font-family: var(--font-principal);
+  font-size: 18px;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.player-review-submit:hover {
+  filter: brightness(1.15);
+}

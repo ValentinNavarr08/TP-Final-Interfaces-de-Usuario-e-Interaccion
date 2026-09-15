@@ -9,4 +9,11 @@ import { MediaItem } from '../../models/media-item';
 })
 export class Card {
   @Input({ required: true }) item!: MediaItem;
+
+  isLiked = false;
+
+  toggleLike(event: Event): void {
+    event.stopPropagation();
+    this.isLiked = !this.isLiked;
+  }
 }

@@ -7,58 +7,59 @@
 
   <app-header></app-header>
 
-  <section class="hero-section">
-  <div class="page-container">
-    <div class="hero-carousel">
-      <img src="resources/hero-banner-1.png" alt="" class="hero-blur-bg" aria-hidden="true" />
-      <img src="resources/hero-banner-1.png" alt="Spider-Man: Brand New Day" class="hero-carousel-image" />
+  @if (catalogMode === 'home') {
+    <section class="hero-section">
+      <div class="page-container">
+        <div class="hero-carousel">
+          <img src="resources/hero-banner-1.png" alt="" class="hero-blur-bg" aria-hidden="true" />
+          <img src="resources/hero-banner-1.png" alt="Spider-Man: Brand New Day" class="hero-carousel-image" />
 
-      <div class="hero-overlay-tint"></div>
+          <div class="hero-overlay-tint"></div>
 
-      <div class="hero-content">
-        <div class="hero-slogan">
-          <span class="hero-subtitle">PELÍCULA · ACCIÓN</span>
-          <h1 class="hero-title">Spider-Man: Brand New Day</h1>
+          <div class="hero-content">
+            <div class="hero-slogan">
+              <span class="hero-subtitle">PELÍCULA · ACCIÓN</span>
+              <h1 class="hero-title">Spider-Man: Brand New Day</h1>
+            </div>
+
+            <button class="hero-cta">
+              <span>Ver ahora</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="hero-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
         </div>
-
-        <button class="hero-cta">
-          <span>Ver ahora</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-        </button>
       </div>
+    </section>
 
-      <div class="hero-dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <div class="page-container">
-    @for (row of rowsBeforeBanner; track row.title) {
-      <app-carousel-row
-        [title]="row.title"
-        [items]="row.items"
-        [featured]="row.featured ?? false"
-        [showDots]="row.showDots ?? true"
-      />
-    }
+    <div class="page-container">
+      @for (row of rowsBeforeBanner; track row.title) {
+        <app-carousel-row
+          [title]="row.title"
+          [items]="row.items"
+          [featured]="row.featured ?? false"
+          [showDots]="row.showDots ?? true"
+        />
+      }
 
       <section class="promo-banner">
-  <div class="promo-frame">
-    <div class="promo-card">
-      <img class="promo-trees" src="resources/arboles.png" alt="" aria-hidden="true" />
+        <div class="promo-frame">
+          <div class="promo-card">
+            <img class="promo-trees" src="resources/arboles.png" alt="" aria-hidden="true" />
 
-      <h2 class="promo-title">Nuevos episodios</h2>
-      <p class="promo-subtitle">Descubre los nuevos episodios cada semana!</p>
-    </div>
+            <h2 class="promo-title">Nuevos episodios</h2>
+            <p class="promo-subtitle">Descubre los nuevos episodios cada semana!</p>
+          </div>
 
-    <div class="promo-countdown">
-      <span class="countdown-label">Proximo estreno en:</span>
+          <div class="promo-countdown">
+            <span class="countdown-label">Proximo estreno en:</span>
             <div class="countdown-boxes">
               <div class="countdown-box" [class.countdown-digit-pulse]="hoursPulse">
                 <span class="countdown-digit">{{ hours }}</span>
@@ -72,21 +73,73 @@
                 <span class="countdown-digit">{{ seconds }}</span>
               </div>
             </div>
-    </div>
+          </div>
 
-    <img class="promo-characters" src="resources/Group_3.png" alt="House of the Dragon" />
+          <img class="promo-characters" src="resources/Group_3.png" alt="House of the Dragon" />
+        </div>
+      </section>
+
+      @for (row of rowsAfterBanner; track row.title) {
+        <app-carousel-row
+          [title]="row.title"
+          [items]="row.items"
+          [featured]="row.featured ?? false"
+          [showDots]="row.showDots ?? true"
+        />
+      }
+    </div>
+  } @else {
+    <main class="catalog-page">
+      <section class="hero-section">
+        <div class="page-container">
+          <div class="hero-carousel">
+            <img src="resources/hero-banner-1.png" alt="" class="hero-blur-bg" aria-hidden="true" />
+            <img src="resources/hero-banner-1.png" alt="{{ catalogMode === 'peliculas' ? 'Películas' : 'Series' }}" class="hero-carousel-image" />
+
+            <div class="hero-overlay-tint"></div>
+
+            <div class="hero-content">
+              <div class="hero-slogan">
+                <span class="hero-subtitle">{{ catalogMode === 'peliculas' ? 'PELICULAS' : 'SERIES' }} · RECOMENDADO</span>
+                <h1 class="hero-title">{{ catalogMode === 'peliculas' ? 'Películas destacadas' : 'Series destacadas' }}</h1>
+              </div>
+
+              <button class="hero-cta">
+                <span>Ver ahora</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </button>
+            </div>
+
+            <div class="hero-dots">
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+        <section class="catalog-toolbar page-container">
+  <div class="filter-group">
+    <label>Género</label>
+    <app-dropdown [options]="genres" [selected]="selectedGenre" (selectedChange)="onGenreSelect($event)" />
+  </div>
+
+  <div class="filter-group">
+    <label>Fecha de creación</label>
+    <app-dropdown [options]="years" [selected]="selectedYear" (selectedChange)="onYearSelect($event)" />
   </div>
 </section>
 
-    @for (row of rowsAfterBanner; track row.title) {
-      <app-carousel-row
-        [title]="row.title"
-        [items]="row.items"
-        [featured]="row.featured ?? false"
-        [showDots]="row.showDots ?? true"
-      />
-    }
-  </div>
+      <section class="catalog-grid page-container">
+        @for (item of filteredCatalogItems; track item.id) {
+          <app-card [item]="item" />
+        }
+      </section>
+    </main>
+  }
 
   <app-footer></app-footer>
 </div>

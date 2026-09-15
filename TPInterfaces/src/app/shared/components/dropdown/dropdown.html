@@ -1,0 +1,23 @@
+<div class="dropdown-wrapper">
+  <button class="season-btn" (click)="toggle()">
+    <span>{{ selected }}</span>
+    <svg class="season-chevron" [class.open]="isOpen" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  </button>
+
+  @if (isOpen) {
+    <div class="dropdown-menu">
+      <div class="dropdown-arrow"></div>
+      @for (option of options; track option) {
+        <button
+          class="season-option"
+          [class.active]="option === selected"
+          (click)="select(option)"
+        >
+          {{ option }}
+        </button>
+      }
+    </div>
+  }
+</div>

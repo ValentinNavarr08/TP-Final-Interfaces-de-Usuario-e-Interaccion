@@ -7,4 +7,5 @@ export interface MediaItem {
   duration?: number;
   rating?: string;
   progress?: number; // 0-100, para "Seguir viendo"
+  type?: 'pelicula' | 'serie';
 }

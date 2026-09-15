@@ -1,0 +1,92 @@
+:host {
+  display: inline-block;
+}
+
+.dropdown-wrapper {
+  position: relative;
+}
+
+.season-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-width: 200px;
+  background:
+    radial-gradient(181.06% 153.78% at -1.52% 100%, rgba(54, 52, 163, 0.3367) 0%, rgba(193, 193, 222, 0) 100%),
+    rgba(0, 0, 0, 0.73);
+  border: 1px solid #353843;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  padding: 14px 20px;
+  font-family: var(--font-principal);
+  font-size: 16px;
+  font-weight: 500;
+  color: #FFFFFF;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.season-chevron {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.season-chevron.open {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  width: 100%;
+  min-width: 200px;
+  box-sizing: border-box;
+  padding: 8px;
+  background:
+    radial-gradient(181.06% 153.78% at -1.52% 100%, rgba(54, 52, 163, 0.3367) 0%, rgba(193, 193, 222, 0) 100%),
+    rgba(0, 0, 0, 0.85);
+  border: 1px solid #353843;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  z-index: 10;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  top: -8px;
+  left: 24px;
+  width: 16px;
+  height: 12px;
+  background: #101116;
+  border: 1px solid #353843;
+  border-bottom: none;
+  border-right: none;
+  transform: rotate(45deg);
+}
+
+.season-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-principal);
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 10px 12px;
+  border-radius: 6px;
+}
+
+.season-option:hover {
+  background: rgba(123, 121, 225, 0.15);
+}
+
+.season-option.active {
+  color: #FFFFFF;
+  font-weight: 600;
+  background: rgba(123, 121, 225, 0.25);
+}
